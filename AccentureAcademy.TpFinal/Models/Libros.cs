@@ -31,7 +31,6 @@ namespace AccentureAcademy.TpFinal.Models
         public int Id_Nivel { get; set; }
     
         public virtual Editoriales Editoriales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EscritoPor> EscritoPor { get; set; }
         public virtual Generos Generos { get; set; }
         public virtual Niveles Niveles { get; set; }

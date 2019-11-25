@@ -1,0 +1,26 @@
+﻿@using AccentureAcademy.TpFinal.Models
+@model List<Niveles>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar Niveles</title>
+</head>
+<body>
+    <h1>Libros</h1>
+    <div>
+        <ul>
+            @foreach (Niveles nivel in this.Model)
+            {
+                <li>@nivel.Nivel</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

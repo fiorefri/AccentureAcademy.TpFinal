@@ -1,0 +1,26 @@
+﻿@using AccentureAcademy.TpFinal.Models
+@model List<Generos>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar Generos</title>
+</head>
+<body>
+    <h1>Generos</h1>
+    <div> 
+        <ul>
+            @foreach (Generos genero in this.Model)
+            {
+                <li>@genero.Genero</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

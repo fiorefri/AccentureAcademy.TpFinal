@@ -1,0 +1,26 @@
+﻿@using AccentureAcademy.TpFinal.Models
+@model List<Libros>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar Libros</title>
+</head>
+<body>
+    <h1>Libros</h1>
+    <div>
+        <ul>
+            @foreach (Libros libro in this.Model)
+            {
+                <li>@libro.Titulo</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

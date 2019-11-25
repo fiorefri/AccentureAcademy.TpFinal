@@ -267,15 +267,20 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Editorial\Mostrar.cshtml" />
+    <Content Include="Views\Editorial\Agregar.cshtml" />
+    <Content Include="Views\Genero\Mostrar.cshtml" />
+    <Content Include="Views\Genero\Agregar.cshtml" />
+    <Content Include="Views\Libro\Mostrar.cshtml" />
+    <Content Include="Views\Libro\Agregar.cshtml" />
+    <Content Include="Views\Nivel\Mostrar.cshtml" />
+    <Content Include="Views\Nivel\Agregar.cshtml" />
+    <Content Include="Views\Autor\Mostrar.cshtml" />
+    <Content Include="Views\Autor\Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Autor\" />
-    <Folder Include="Views\Editorial\" />
     <Folder Include="Views\EscritoPor\" />
-    <Folder Include="Views\Genero\" />
-    <Folder Include="Views\Libro\" />
-    <Folder Include="Views\Nivel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,27 @@
+﻿@using AccentureAcademy.TpFinal.Models
+@model List<Editoriales>
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar Editoriales</title>
+</head>
+<body>
+    <h1>Editoriales</h1>    
+    <div> 
+        <ul>
+            @foreach (Editoriales editorial in this.Model)
+            {
+                <li>@editorial.Editorial</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

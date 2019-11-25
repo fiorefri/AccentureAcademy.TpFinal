@@ -1,0 +1,39 @@
+﻿@model AccentureAcademy.TpFinal.Models.Libros
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Agregar Libros</title>
+</head>
+<body>
+    <h1>Agregar un Libro</h1>
+    <form method="post">
+        ISBN:
+        <input type="text" name="ISBN" value="" />
+        <br />
+
+        Título:
+        <input type="text" name="Titulo" value="" />
+        <br />
+
+        Descripción:
+        <input type="text" name="Descripcion" value="" />
+        <br />
+
+        Imagen:
+        <input type="text" name="Imagen" value="Imagen ----" />
+        <br />
+
+        Fecha de Publicación:
+        <input type="datetime" name="FechaPublicacion" value="" />
+
+        <button>Agregar</button>
+    </form>
+</body>
+</html>
