@@ -4,23 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AccentureAcademy.TpFinal.Controllers
 {
     public class LibroController : Controller
     {
-        // GET: Libro
+        private AccentureAcademyDBEntities db;
+        public LibroController()
+        {
+            db = new AccentureAcademyDBEntities();
+        }
+
+        // Mostrar
         public ActionResult Mostrar()
         {
-            var db = new AccentureAcademyDBEntities();
             List<Libros> libros = db.Libros.ToList();
 
             return View(libros);
         }
 
+        // Agregar
         public ActionResult Agregar()
         {
-            return View();
+            return View("Editar");
         }
 
         [HttpPost]
@@ -31,11 +38,12 @@ namespace AccentureAcademy.TpFinal.Controllers
                 return Content("No se pudo ingresar el libro a la base de datos. Pruebe nuevamente");
             }
 
-            var db = new AccentureAcademyDBEntities();
             db.Libros.Add(nuevoLibro);
             db.SaveChanges();
 
             return RedirectToAction("Mostrar");
         }
+
+        // Editar
     }
 }

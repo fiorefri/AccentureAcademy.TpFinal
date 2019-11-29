@@ -4,27 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AccentureAcademy.TpFinal.Controllers
 {
     public class EditorialController : Controller
     {
-        // GET: Editorial
+        private AccentureAcademyDBEntities db;
+        public EditorialController()
+        {
+            db = new AccentureAcademyDBEntities();
+        }
+
+        // Mostrar
         public ActionResult Mostrar()
         {
-            var db = new AccentureAcademyDBEntities();
-            List<Libros> editoriales = db.Libros.ToList();
+            List<Editoriales> editoriales = db.Editoriales.ToList();
 
             return View(editoriales);
         }
 
+        // Agregar
         public ActionResult Agregar()
         {
-            return View();
+            return View("Editar");
         }
 
         [HttpPost]
-        public ActionResult Agregar(Libros nuevaEditorial)
+        public ActionResult Agregar(Editoriales nuevaEditorial)
         {
             if (nuevaEditorial == null)
             {
@@ -32,7 +39,40 @@ namespace AccentureAcademy.TpFinal.Controllers
             }
 
             var db = new AccentureAcademyDBEntities();
-            db.Libros.Add(nuevaEditorial);
+            db.Editoriales.Add(nuevaEditorial);
+            db.SaveChanges();
+
+            return RedirectToAction("Mostrar");
+        }
+
+        // Editar
+        public ActionResult Editar(int id)
+        {
+            Editoriales editorial = db.Editoriales.Find(id);
+
+            return View(editorial);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(Editoriales editorial)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Editoriales.Attach(editorial);
+                db.Entry(editorial).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Content("La editorial se ha actualizado correctamente");
+            }
+            
+            return new HttpStatusCodeResult(505, "Internal server Error. Hacker Detected");
+        }
+
+        // Eliminar 
+        public ActionResult Eliminar(int id)
+        {
+            Editoriales editorial = db.Editoriales.Find(id);
+            db.Editoriales.Remove(editorial);
             db.SaveChanges();
 
             return RedirectToAction("Mostrar");

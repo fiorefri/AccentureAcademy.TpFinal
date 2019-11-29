@@ -4,23 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AccentureAcademy.TpFinal.Controllers
 {
     public class NivelController : Controller
     {
-        // GET: Nivel
+        private AccentureAcademyDBEntities db;
+        public NivelController()
+        {
+            db = new AccentureAcademyDBEntities();
+        }
+
+        // Mostrar
         public ActionResult Mostrar()
         {
-            var db = new AccentureAcademyDBEntities();
             List<Niveles> niveles = db.Niveles.ToList();
 
             return View(niveles);
         }
 
+        // Agregar
         public ActionResult Agregar()
         {
-            return View();
+            return View("Editar");
         }
 
         [HttpPost]
@@ -31,8 +38,40 @@ namespace AccentureAcademy.TpFinal.Controllers
                 return Content("No se pudo ingresar el nivel a la base de datos. Pruebe nuevamente");
             }
 
-            var db = new AccentureAcademyDBEntities();
             db.Niveles.Add(nuevoNivel);
+            db.SaveChanges();
+
+            return RedirectToAction("Mostrar");
+        }
+
+        // Editar
+        public ActionResult Editar(int id)
+        {
+            Niveles nivel = db.Niveles.Find(id);
+
+            return View(nivel);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(Niveles nivel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Niveles.Attach(nivel);
+                db.Entry(nivel).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Content("El nivel se ha actualizado satisfactoriamente");
+            }
+
+            return new HttpStatusCodeResult(505, "Internal server Error. Hacker Detected");
+        }
+
+        // Eliminar
+        public ActionResult Eliminar(int id)
+        {
+            Niveles nivel = db.Niveles.Find(id);
+            db.Niveles.Remove(nivel);
             db.SaveChanges();
 
             return RedirectToAction("Mostrar");
