@@ -1,0 +1,16 @@
+﻿@model AccentureAcademy.TpFinal.Models.Generos
+
+@{
+
+    ViewBag.Title = this.ViewBag.Titulo;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(genero => genero.Genero);
+    @Html.EditorFor(genero => genero.Genero)
+
+    <button type="submit">Enviar</button>
+}

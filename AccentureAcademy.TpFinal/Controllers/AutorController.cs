@@ -20,6 +20,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Mostrar()
         {
             List<Autores> autores = db.Autores.ToList();
+            ViewBag.Titulo = "Autores";
 
             return View(autores);
         }
@@ -27,6 +28,8 @@ namespace AccentureAcademy.TpFinal.Controllers
         // Agregar
         public ActionResult Agregar()
         {
+            ViewBag.Titulo = "Agregar Autor";
+
             return View("Editar");
         }
 
@@ -38,7 +41,6 @@ namespace AccentureAcademy.TpFinal.Controllers
                 return Content("No se pudo ingresar el autor a la base de datos. Pruebe nuevamente");
             }
 
-            var db = new AccentureAcademyDBEntities();
             db.Autores.Add(nuevoAutor);
             db.SaveChanges();
 
@@ -49,6 +51,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Editar(int id)
         {
             Autores autor = db.Autores.Find(id);
+            ViewBag.Titulo = "Editar Autor";
 
             return View(autor);
         }
@@ -62,7 +65,7 @@ namespace AccentureAcademy.TpFinal.Controllers
                 db.Entry(autor).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return Content("Se actualizo correctamente el autor");
+                return RedirectToAction("Mostrar");
             }
 
             return new HttpStatusCodeResult(505, "Internal server Error. Hacker Detected");

@@ -132,11 +132,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutorController.cs" />
     <Compile Include="Controllers\EditorialController.cs" />
-    <Compile Include="Controllers\EscritoPorController.cs" />
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibroController.cs" />
-    <Compile Include="Controllers\NivelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -161,16 +159,10 @@
     <Compile Include="Models\Editoriales.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EscritoPor.cs">
-      <DependentUpon>AccentureAcademy.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Generos.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Libros.cs">
-      <DependentUpon>AccentureAcademy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Niveles.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,6 +290,9 @@
     <Content Include="Views\Genero\Mostrar.cshtml" />
     <Content Include="Views\Libro\Mostrar.cshtml" />
     <Content Include="Views\Nivel\Mostrar.cshtml" />
+    <Content Include="Views\Editorial\Editar.cshtml" />
+    <Content Include="Views\Genero\Editar.cshtml" />
+    <Content Include="Views\Libro\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

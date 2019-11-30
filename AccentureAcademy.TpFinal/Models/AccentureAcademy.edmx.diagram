@@ -5,17 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8239ee2d8311462a8887c288afa4596f" Name="Diagram1">
-        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Autores" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Editoriales" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="AccentureAcademy.DBModel.EscritoPor" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Generos" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Libros" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Niveles" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <AssociationConnector Association="AccentureAcademy.DBModel.FK_ESCRITOPOR_AUTORES" ManuallyRouted="false" />
-        <AssociationConnector Association="AccentureAcademy.DBModel.FK_LIBROS_EDITORIALES" ManuallyRouted="false" />
-        <AssociationConnector Association="AccentureAcademy.DBModel.FK_ESCRITOPOR_LIBROS" ManuallyRouted="false" />
-        <AssociationConnector Association="AccentureAcademy.DBModel.FK_LIBROS_GENEROS" ManuallyRouted="false" />
-        <AssociationConnector Association="AccentureAcademy.DBModel.FK_LIBROS_NIVELES" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Autores" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Editoriales" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Generos" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AccentureAcademy.DBModel.Libros" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="AccentureAcademy.DBModel.FK_LIBROS_EDITORIALES" />
+        <AssociationConnector Association="AccentureAcademy.DBModel.FK_LIBROS_GENEROS" />
+        <AssociationConnector Association="AccentureAcademy.DBModel.EscritoPor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

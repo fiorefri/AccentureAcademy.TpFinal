@@ -5,18 +5,35 @@
     ViewBag.Title = "Editoriales";
 }
 
-<h2>Mostrar</h2>
+<article class="mostrar-editar card container">
+    <h2 class="card-header d-flex justify-content-center">Mostrar</h2>
+    <section class="d-flex align-items-center justify-content-end m-2" title="Agregar Nueva Editorial"><a href="@Url.Action("Agregar", "Editorial")"><ion-icon name="add" size="large"></ion-icon></a></section>
 
-@if (this.Model.Count > 0)
-{
-    <ul>
-        @foreach (Editoriales editorial in this.Model)
-        {
-            <li>@editorial.Editorial</li>
-        }
-    </ul>
-}
-else
-{
-    <p>No se encuentran editoriales para mostrar</p>
-}
+    @if (this.Model.Count > 0)
+    {
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Editorial</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Editoriales editorial in this.Model)
+                {
+                    <tr>
+                        <td>@editorial.Editorial</td>
+                        <td class="text-right">
+                            @Html.ActionLink("Editar", "Editar", new { id = editorial.Id }, new { @class="mr-3" })
+                            @Html.ActionLink("Eliminar", "Eliminar", new { id = editorial.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No se encuentran editoriales para mostrar</p>
+    }
+</article>

@@ -27,9 +27,7 @@ namespace AccentureAcademy.TpFinal.Models
     
         public virtual DbSet<Autores> Autores { get; set; }
         public virtual DbSet<Editoriales> Editoriales { get; set; }
-        public virtual DbSet<EscritoPor> EscritoPor { get; set; }
         public virtual DbSet<Generos> Generos { get; set; }
         public virtual DbSet<Libros> Libros { get; set; }
-        public virtual DbSet<Niveles> Niveles { get; set; }
     }
 }

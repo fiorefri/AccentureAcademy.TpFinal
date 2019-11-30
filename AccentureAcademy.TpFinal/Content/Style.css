@@ -155,30 +155,22 @@ footer {
     color: white;
 }
 
-/* FORMS */
+/* MOSTRAR */
 
-.formularios {
-    background-image: url(imagenes/biblioteca-2.jpg);
-    margin: 200px;
-}
-
-.formularios .card {
-    padding: 30px;
+.mostrar-editar {
+    margin: 100px auto;
     background-color: rgba(250, 250, 250, 0.80);
+    padding: 0;
 }
 
-.formularios h2 {
+.mostrar-editar h2 {
     color: #a94802;
     font-weight: bolder;
+    background-color: none;
+    padding: 30px;
 }
 
-.btn {
-    background-color: #1f2c13;
-    color: white;
-    float: right;
+.mostrar-editar table ion-icon {
+    font-size: 25px;
 }
 
-.btn:hover {
-    color: white;
-    font-weight: bolder;
-}

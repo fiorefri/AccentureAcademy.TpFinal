@@ -1,0 +1,53 @@
+﻿@using AccentureAcademy.TpFinal.Models
+@model Libros
+
+@{
+    ViewBag.Title = ViewBag.Titulo;
+    var db = new AccentureAcademyDBEntities();
+    List<Generos> generos = db.Generos.ToList();
+    List<Editoriales> editoriales = db.Editoriales.ToList();
+    List<Autores> autores = db.Autores.ToList();
+}
+
+<h2>@ViewBag.Titulo</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(libro => libro.Titulo)
+    @Html.EditorFor(libro => libro.Titulo)
+
+    @Html.LabelFor(libro => libro.ISBN)
+    @Html.EditorFor(libro => libro.ISBN)
+
+    @Html.LabelFor(libro => libro.Descripcion)
+    @Html.EditorFor(libro => libro.Descripcion)
+
+    @Html.LabelFor(libro => libro.Imagen)
+    @Html.EditorFor(libro => libro.Imagen)
+
+    <select class="form-control" name="Id_Genero">
+        <option selected>Seleccione un género</option>
+        @foreach (Generos genero in generos)
+        {
+            <option value="@genero.Id">@genero.Genero</option>
+        }
+    </select>
+
+    <select class="form-control" name="Id_Editorial">
+        <option selected>Seleccione un género</option>
+        @foreach (Editoriales editorial in editoriales)
+        {
+            <option value="@editorial.Id">@editorial.Editorial</option>
+        }
+    </select>
+
+    <select class="form-control" name="autores">
+        <option selected>Seleccione un género</option>
+        @foreach (Autores autor in autores)
+        {
+            <option value="@autor.Id">@autor.NombreAutor</option>
+        }
+    </select>
+
+    <button type="submit">Enviar</button>
+}

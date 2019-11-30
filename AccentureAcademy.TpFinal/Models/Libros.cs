@@ -17,7 +17,7 @@ namespace AccentureAcademy.TpFinal.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Libros()
         {
-            this.EscritoPor = new HashSet<EscritoPor>();
+            this.Autores = new HashSet<Autores>();
         }
     
         public int Id { get; set; }
@@ -25,14 +25,12 @@ namespace AccentureAcademy.TpFinal.Models
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
-        public System.DateTime FechaPublicacion { get; set; }
         public int Id_Genero { get; set; }
         public int Id_Editorial { get; set; }
-        public int Id_Nivel { get; set; }
     
         public virtual Editoriales Editoriales { get; set; }
-        public virtual ICollection<EscritoPor> EscritoPor { get; set; }
         public virtual Generos Generos { get; set; }
-        public virtual Niveles Niveles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Autores> Autores { get; set; }
     }
 }

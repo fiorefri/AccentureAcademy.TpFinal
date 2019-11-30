@@ -5,9 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Rubik|Sulphur+Point&display=swap" rel="stylesheet">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <link href="~/Content/Style.css" rel="stylesheet" />
 </head>
 <body>
@@ -21,13 +25,12 @@
         <div class="menu-links">
             <ion-icon name="close" size="large" class="cerrar align-self-start p-4"></ion-icon>
             <div class="links d-flex flex-column justify-content-around pl-3">
-                <a>@Html.ActionLink("Inicio", "Index", "Home")</a>
-                <a>@Html.ActionLink("Libros", "Mostrar", "Libro")</a>
-                <a>@Html.ActionLink("Autores", "Mostrar", "Autor")</a>
-                <a>@Html.ActionLink("Generos", "Mostrar", "Genero")</a>
-                <a>@Html.ActionLink("Editoriales", "Mostrar", "Editorial")</a>
-                <a>@Html.ActionLink("Niveles", "Mostrar", "Nivel")</a>
-                <a>@Html.ActionLink("Sobre Nosotros", "Index", "Home")</a>
+                @Html.ActionLink("Inicio", "Index", "Home")
+                @Html.ActionLink("Libros", "Mostrar", "Libro")
+                @Html.ActionLink("Autores", "Mostrar", "Autor")
+                @Html.ActionLink("Géneros", "Mostrar", "Genero")
+                @Html.ActionLink("Editoriales", "Mostrar", "Editorial")
+                @Html.ActionLink("Sobre Nosotros", "Index", "Home")
             </div>
         </div>
     </nav>
@@ -44,8 +47,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script>response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");</script>
 </body>
 </html>

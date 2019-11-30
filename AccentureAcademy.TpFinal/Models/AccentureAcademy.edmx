@@ -4,18 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AccentureAcademy.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AccentureAcademy.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Autores">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Apellido" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
-          <Property Name="FechaFallecimiento" Type="datetime" Nullable="false" />
-          <Property Name="Biografia" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Imagen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreAutor" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Editoriales">
           <Key>
@@ -26,9 +21,9 @@
         </EntityType>
         <EntityType Name="EscritoPor">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Id_Libro" />
+            <PropertyRef Name="Id_Autor" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Libro" Type="int" Nullable="false" />
           <Property Name="Id_Autor" Type="int" Nullable="false" />
         </EntityType>
@@ -37,7 +32,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Genero" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Genero" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Libros">
           <Key>
@@ -48,17 +43,8 @@
           <Property Name="Titulo" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Imagen" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FechaPublicacion" Type="datetime" Nullable="false" />
           <Property Name="Id_Genero" Type="int" Nullable="false" />
           <Property Name="Id_Editorial" Type="int" Nullable="false" />
-          <Property Name="Id_Nivel" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Niveles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nivel" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Association Name="FK_ESCRITOPOR_AUTORES">
           <End Role="Autores" Type="Self.Autores" Multiplicity="1">
@@ -113,20 +99,6 @@
             </Principal>
             <Dependent Role="Libros">
               <PropertyRef Name="Id_Genero" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LIBROS_NIVELES">
-          <End Role="Niveles" Type="Self.Niveles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Libros" Type="Self.Libros" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Niveles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Libros">
-              <PropertyRef Name="Id_Nivel" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -136,7 +108,6 @@
           <EntitySet Name="EscritoPor" EntityType="Self.EscritoPor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Generos" EntityType="Self.Generos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Libros" EntityType="Self.Libros" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Niveles" EntityType="Self.Niveles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ESCRITOPOR_AUTORES" Association="Self.FK_ESCRITOPOR_AUTORES">
             <End Role="Autores" EntitySet="Autores" />
             <End Role="EscritoPor" EntitySet="EscritoPor" />
@@ -153,100 +124,73 @@
             <End Role="Generos" EntitySet="Generos" />
             <End Role="Libros" EntitySet="Libros" />
           </AssociationSet>
-          <AssociationSet Name="FK_LIBROS_NIVELES" Association="Self.FK_LIBROS_NIVELES">
-            <End Role="Niveles" EntitySet="Niveles" />
-            <End Role="Libros" EntitySet="Libros" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AccentureAcademy.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AccentureAcademyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autores" EntityType="AccentureAcademy.DBModel.Autores" />
+          <EntitySet Name="Editoriales" EntityType="AccentureAcademy.DBModel.Editoriales" />
+          <EntitySet Name="Generos" EntityType="AccentureAcademy.DBModel.Generos" />
+          <EntitySet Name="Libros" EntityType="AccentureAcademy.DBModel.Libros" />
+          <AssociationSet Name="FK_LIBROS_EDITORIALES" Association="AccentureAcademy.DBModel.FK_LIBROS_EDITORIALES">
+            <End Role="Editoriales" EntitySet="Editoriales" />
+            <End Role="Libros" EntitySet="Libros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIBROS_GENEROS" Association="AccentureAcademy.DBModel.FK_LIBROS_GENEROS">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Libros" EntitySet="Libros" />
+          </AssociationSet>
+          <AssociationSet Name="EscritoPor" Association="AccentureAcademy.DBModel.EscritoPor">
+            <End Role="Autores" EntitySet="Autores" />
+            <End Role="Libros" EntitySet="Libros" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Autores">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaFallecimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Biografia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="EscritoPor" Relationship="Self.FK_ESCRITOPOR_AUTORES" FromRole="Autores" ToRole="EscritoPor" />
+          <Property Name="NombreAutor" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Libros" Relationship="AccentureAcademy.DBModel.EscritoPor" FromRole="Autores" ToRole="Libros" />
         </EntityType>
         <EntityType Name="Editoriales">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Editorial" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Libros" Relationship="Self.FK_LIBROS_EDITORIALES" FromRole="Editoriales" ToRole="Libros" />
-        </EntityType>
-        <EntityType Name="EscritoPor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Libro" Type="Int32" Nullable="false" />
-          <Property Name="Id_Autor" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Autores" Relationship="Self.FK_ESCRITOPOR_AUTORES" FromRole="EscritoPor" ToRole="Autores" />
-          <NavigationProperty Name="Libros" Relationship="Self.FK_ESCRITOPOR_LIBROS" FromRole="EscritoPor" ToRole="Libros" />
+          <Property Name="Editorial" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Libros" Relationship="AccentureAcademy.DBModel.FK_LIBROS_EDITORIALES" FromRole="Editoriales" ToRole="Libros" />
         </EntityType>
         <EntityType Name="Generos">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Genero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Libros" Relationship="Self.FK_LIBROS_GENEROS" FromRole="Generos" ToRole="Libros" />
+          <Property Name="Genero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Libros" Relationship="AccentureAcademy.DBModel.FK_LIBROS_GENEROS" FromRole="Generos" ToRole="Libros" />
         </EntityType>
         <EntityType Name="Libros">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ISBN" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FechaPublicacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ISBN" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Id_Genero" Type="Int32" Nullable="false" />
           <Property Name="Id_Editorial" Type="Int32" Nullable="false" />
-          <Property Name="Id_Nivel" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Editoriales" Relationship="Self.FK_LIBROS_EDITORIALES" FromRole="Libros" ToRole="Editoriales" />
-          <NavigationProperty Name="EscritoPor" Relationship="Self.FK_ESCRITOPOR_LIBROS" FromRole="Libros" ToRole="EscritoPor" />
-          <NavigationProperty Name="Generos" Relationship="Self.FK_LIBROS_GENEROS" FromRole="Libros" ToRole="Generos" />
-          <NavigationProperty Name="Niveles" Relationship="Self.FK_LIBROS_NIVELES" FromRole="Libros" ToRole="Niveles" />
+          <NavigationProperty Name="Editoriales" Relationship="AccentureAcademy.DBModel.FK_LIBROS_EDITORIALES" FromRole="Libros" ToRole="Editoriales" />
+          <NavigationProperty Name="Generos" Relationship="AccentureAcademy.DBModel.FK_LIBROS_GENEROS" FromRole="Libros" ToRole="Generos" />
+          <NavigationProperty Name="Autores" Relationship="AccentureAcademy.DBModel.EscritoPor" FromRole="Libros" ToRole="Autores" />
         </EntityType>
-        <EntityType Name="Niveles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nivel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Libros" Relationship="Self.FK_LIBROS_NIVELES" FromRole="Niveles" ToRole="Libros" />
-        </EntityType>
-        <Association Name="FK_ESCRITOPOR_AUTORES">
-          <End Role="Autores" Type="Self.Autores" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="EscritoPor" Type="Self.EscritoPor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Autores">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EscritoPor">
-              <PropertyRef Name="Id_Autor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LIBROS_EDITORIALES">
-          <End Role="Editoriales" Type="Self.Editoriales" Multiplicity="1">
+          <End Type="AccentureAcademy.DBModel.Editoriales" Role="Editoriales" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Libros" Type="Self.Libros" Multiplicity="*" />
+          <End Type="AccentureAcademy.DBModel.Libros" Role="Libros" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Editoriales">
               <PropertyRef Name="Id" />
@@ -256,25 +200,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ESCRITOPOR_LIBROS">
-          <End Role="Libros" Type="Self.Libros" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="EscritoPor" Type="Self.EscritoPor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Libros">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EscritoPor">
-              <PropertyRef Name="Id_Libro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LIBROS_GENEROS">
-          <End Role="Generos" Type="Self.Generos" Multiplicity="1">
+          <End Type="AccentureAcademy.DBModel.Generos" Role="Generos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Libros" Type="Self.Libros" Multiplicity="*" />
+          <End Type="AccentureAcademy.DBModel.Libros" Role="Libros" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Generos">
               <PropertyRef Name="Id" />
@@ -284,48 +214,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LIBROS_NIVELES">
-          <End Role="Niveles" Type="Self.Niveles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Libros" Type="Self.Libros" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Niveles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Libros">
-              <PropertyRef Name="Id_Nivel" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="EscritoPor">
+          <End Type="AccentureAcademy.DBModel.Autores" Role="Autores" Multiplicity="*" />
+          <End Type="AccentureAcademy.DBModel.Libros" Role="Libros" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="AccentureAcademyDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Autores" EntityType="Self.Autores" />
-          <EntitySet Name="Editoriales" EntityType="Self.Editoriales" />
-          <EntitySet Name="EscritoPor" EntityType="Self.EscritoPor" />
-          <EntitySet Name="Generos" EntityType="Self.Generos" />
-          <EntitySet Name="Libros" EntityType="Self.Libros" />
-          <EntitySet Name="Niveles" EntityType="Self.Niveles" />
-          <AssociationSet Name="FK_ESCRITOPOR_AUTORES" Association="Self.FK_ESCRITOPOR_AUTORES">
-            <End Role="Autores" EntitySet="Autores" />
-            <End Role="EscritoPor" EntitySet="EscritoPor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LIBROS_EDITORIALES" Association="Self.FK_LIBROS_EDITORIALES">
-            <End Role="Editoriales" EntitySet="Editoriales" />
-            <End Role="Libros" EntitySet="Libros" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ESCRITOPOR_LIBROS" Association="Self.FK_ESCRITOPOR_LIBROS">
-            <End Role="Libros" EntitySet="Libros" />
-            <End Role="EscritoPor" EntitySet="EscritoPor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LIBROS_GENEROS" Association="Self.FK_LIBROS_GENEROS">
-            <End Role="Generos" EntitySet="Generos" />
-            <End Role="Libros" EntitySet="Libros" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LIBROS_NIVELES" Association="Self.FK_LIBROS_NIVELES">
-            <End Role="Niveles" EntitySet="Niveles" />
-            <End Role="Libros" EntitySet="Libros" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -335,64 +227,48 @@
           <EntitySetMapping Name="Autores">
             <EntityTypeMapping TypeName="AccentureAcademy.DBModel.Autores">
               <MappingFragment StoreEntitySet="Autores">
+                <ScalarProperty Name="NombreAutor" ColumnName="NombreAutor" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="FechaFallecimiento" ColumnName="FechaFallecimiento" />
-                <ScalarProperty Name="Biografia" ColumnName="Biografia" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Editoriales">
             <EntityTypeMapping TypeName="AccentureAcademy.DBModel.Editoriales">
               <MappingFragment StoreEntitySet="Editoriales">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Editorial" ColumnName="Editorial" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EscritoPor">
-            <EntityTypeMapping TypeName="AccentureAcademy.DBModel.EscritoPor">
-              <MappingFragment StoreEntitySet="EscritoPor">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_Libro" ColumnName="Id_Libro" />
-                <ScalarProperty Name="Id_Autor" ColumnName="Id_Autor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Generos">
             <EntityTypeMapping TypeName="AccentureAcademy.DBModel.Generos">
               <MappingFragment StoreEntitySet="Generos">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Libros">
             <EntityTypeMapping TypeName="AccentureAcademy.DBModel.Libros">
               <MappingFragment StoreEntitySet="Libros">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
-                <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
                 <ScalarProperty Name="Id_Editorial" ColumnName="Id_Editorial" />
-                <ScalarProperty Name="Id_Nivel" ColumnName="Id_Nivel" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Niveles">
-            <EntityTypeMapping TypeName="AccentureAcademy.DBModel.Niveles">
-              <MappingFragment StoreEntitySet="Niveles">
+                <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="EscritoPor" TypeName="AccentureAcademy.DBModel.EscritoPor" StoreEntitySet="EscritoPor">
+            <EndProperty Name="Libros">
+              <ScalarProperty Name="Id" ColumnName="Id_Libro" />
+            </EndProperty>
+            <EndProperty Name="Autores">
+              <ScalarProperty Name="Id" ColumnName="Id_Autor" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -2,21 +2,64 @@
 @model List<Autores>
 
 @{
-    ViewBag.Title = "Autores";
+    ViewBag.Title = ViewBag.Titulo;
 }
 
-<h2>Mostrar</h2>
+<article class="mostrar-editar card container">
+    <h2 class="card-header d-flex justify-content-center">@ViewBag.Titulo</h2>
+    <section class="d-flex align-items-center justify-content-end m-2" title="Agregar Nuevo Autor"><a href="@Url.Action("Agregar")"><ion-icon name="add" size="large"></ion-icon></a></section>
 
-@if (this.Model.Count > 0)
-{
-    <ul>
-        @foreach (Autores autor in this.Model)
-        {
-            <li>@autor.Apellido</li>
-        }
-    </ul>
-} else
-{
-    <p>No se encuentran autores para mostrar</p>
-}
+    @if (this.Model.Count > 0)
+    {
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre Autor</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Autores autor in this.Model)
+                {
+                    <tr>
+                        <td>@autor.NombreAutor</td>
+                        <td class="text-right">
+                            <a href="@Url.Action("Editar", null, new { id = autor.Id })" class="mr-3" title="Editar @autor.NombreAutor"><ion-icon name="create"></ion-icon></a>
+                            <a><ion-icon name="trash"></ion-icon></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="Eliminar" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="Eliminar">Eliminar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @foreach (Autores autor in this.Model)
+                    {
+                        <div class="modal-body">
+
+                            ¿Estás seguro de eliminar a @autor.NombreAutor?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">@Html.ActionLink("Aceptar", "Eliminar", new { id = autor.Id })</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <p>No se encuentran autores para mostrar</p>
+    }
+</article>
 

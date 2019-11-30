@@ -20,6 +20,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Mostrar()
         {
             List<Editoriales> editoriales = db.Editoriales.ToList();
+            ViewBag.Titulo = "Editoriales";
 
             return View(editoriales);
         }
@@ -27,6 +28,8 @@ namespace AccentureAcademy.TpFinal.Controllers
         // Agregar
         public ActionResult Agregar()
         {
+            ViewBag.Titulo = "Agregar Editorial";
+
             return View("Editar");
         }
 
@@ -49,6 +52,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Editar(int id)
         {
             Editoriales editorial = db.Editoriales.Find(id);
+            ViewBag.Titulo = "Editar Editorial";
 
             return View(editorial);
         }
@@ -62,7 +66,7 @@ namespace AccentureAcademy.TpFinal.Controllers
                 db.Entry(editorial).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return Content("La editorial se ha actualizado correctamente");
+                return RedirectToAction("Mostrar");
             }
             
             return new HttpStatusCodeResult(505, "Internal server Error. Hacker Detected");

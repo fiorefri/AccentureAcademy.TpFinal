@@ -17,18 +17,13 @@ namespace AccentureAcademy.TpFinal.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Autores()
         {
-            this.EscritoPor = new HashSet<EscritoPor>();
+            this.Libros = new HashSet<Libros>();
         }
     
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public System.DateTime FechaNacimiento { get; set; }
-        public System.DateTime FechaFallecimiento { get; set; }
-        public string Biografia { get; set; }
-        public string Imagen { get; set; }
+        public string NombreAutor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EscritoPor> EscritoPor { get; set; }
+        public virtual ICollection<Libros> Libros { get; set; }
     }
 }

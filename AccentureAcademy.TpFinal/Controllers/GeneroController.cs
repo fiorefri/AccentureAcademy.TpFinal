@@ -20,6 +20,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Mostrar()
         {
             List<Generos> generos = db.Generos.ToList();
+            ViewBag.Titulo = "Ver Géneros";
 
             return View(generos);
         }
@@ -27,6 +28,8 @@ namespace AccentureAcademy.TpFinal.Controllers
         // Agregar
         public ActionResult Agregar()
         {
+            ViewBag.Titulo = "Agregar Género";
+
             return View("Editar");
         }
 
@@ -49,6 +52,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Editar(int id)
         {
             Generos genero = db.Generos.Find(id);
+            ViewBag.Titulo = "Editar Género";
 
             return View(genero);
         }
@@ -62,7 +66,7 @@ namespace AccentureAcademy.TpFinal.Controllers
                 db.Entry(genero).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return Content("El género se ha editado correctamente");
+                return RedirectToAction("Mostrar");
             }
 
             return new HttpStatusCodeResult(505, "Internal server Error. Hacker Detected");

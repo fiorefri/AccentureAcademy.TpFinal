@@ -1,0 +1,16 @@
+﻿@model AccentureAcademy.TpFinal.Models.Editoriales
+
+@{
+
+    ViewBag.Title = this.ViewBag.Titulo;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(editorial => editorial.Editorial);
+    @Html.EditorFor(editorial => editorial.Editorial)
+
+    <button type="submit">Enviar</button>
+}
