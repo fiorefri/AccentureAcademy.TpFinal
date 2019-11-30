@@ -2,25 +2,21 @@
 @model List<Autores>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Autores";
 }
 
-<!DOCTYPE html>
+<h2>Mostrar</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Mostrar Autores</title>
-</head>
-<body>
-    <h1>Libros</h1>
-    <div>
-        <ul>
-            @foreach (Autores autor in this.Model)
-            {
-                <li>@autor.Nombre  @autor.Apellido</li>
-            }
-        </ul>
-    </div>
-</body>
-</html>
+@if (this.Model.Count > 0)
+{
+    <ul>
+        @foreach (Autores autor in this.Model)
+        {
+            <li>@autor.Apellido</li>
+        }
+    </ul>
+} else
+{
+    <p>No se encuentran autores para mostrar</p>
+}
+

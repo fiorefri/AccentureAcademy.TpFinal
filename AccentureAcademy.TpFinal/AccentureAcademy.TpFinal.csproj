@@ -182,10 +182,34 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Style.css" />
     <Content Include="Data\Script.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\biblioteca-1.jpg" />
+    <Content Include="Images\biblioteca-2.jpg" />
+    <Content Include="Images\biblioteca-3.jpg" />
+    <Content Include="Images\biblioteca-4.jpg" />
+    <Content Include="Images\biblioteca-5.jpg" />
+    <Content Include="Images\BooksCovers\arlt-juguete-rabioso.png" />
+    <Content Include="Images\BooksCovers\bioy-casares-invencion-morel.png" />
+    <Content Include="Images\BooksCovers\borges-ficciones.png" />
+    <Content Include="Images\BooksCovers\cortazar-rayuela.png" />
+    <Content Include="Images\BooksCovers\hernandez-martin-fierro.png" />
+    <Content Include="Images\BooksCovers\puig-boquitas-pintadas.png" />
+    <Content Include="Images\photo_2019-11-25_21-44-12.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-26.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-39.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-43.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-45.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-48.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-51.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-53.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-44-57.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-45-00.jpg" />
+    <Content Include="Images\photo_2019-11-25_21-45-04.jpg" />
+    <Content Include="Images\templanza-icono.png" />
     <Content Include="Models\AccentureAcademy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AccentureAcademy.Context.cs</LastGenOutput>
@@ -240,6 +264,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Script.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -267,20 +292,15 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Editorial\Mostrar.cshtml" />
-    <Content Include="Views\Editorial\Agregar.cshtml" />
-    <Content Include="Views\Genero\Mostrar.cshtml" />
-    <Content Include="Views\Genero\Agregar.cshtml" />
-    <Content Include="Views\Libro\Mostrar.cshtml" />
-    <Content Include="Views\Libro\Agregar.cshtml" />
-    <Content Include="Views\Nivel\Mostrar.cshtml" />
-    <Content Include="Views\Nivel\Agregar.cshtml" />
+    <Content Include="Views\Autor\Editar.cshtml" />
     <Content Include="Views\Autor\Mostrar.cshtml" />
-    <Content Include="Views\Autor\Agregar.cshtml" />
+    <Content Include="Views\Editorial\Mostrar.cshtml" />
+    <Content Include="Views\Genero\Mostrar.cshtml" />
+    <Content Include="Views\Libro\Mostrar.cshtml" />
+    <Content Include="Views\Nivel\Mostrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EscritoPor\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

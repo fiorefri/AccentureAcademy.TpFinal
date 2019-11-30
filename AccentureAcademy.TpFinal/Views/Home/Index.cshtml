@@ -1,31 +1,65 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Templanza";
 }
+<article class="carrusel">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="10000">
+                <img src="~/Images/biblioteca-2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <img src="~/Images/biblioteca-5.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <img src="~/Images/biblioteca-4.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+</article>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<article class="libros container mt-5">
+    <h1 class="text-center">Libros</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="row d-flex justify-content-around">
+        <section title="El Juguete Rabioso - Roberto Arlt" class="libro card col-md-2">
+            <a href="">
+                <img src="~/Images/BooksCovers/arlt-juguete-rabioso.png" alt="juguete rabioso de arlt" class="card-img-top">
+            </a>
+        </section>
+
+        <section title="La Invención de Morel - Adolfo Bioy Casares" class="libro card col-md-2">
+            <img src="~/Images/BooksCovers/bioy-casares-invencion-morel.png" alt="la invencion de morel de bioy casares" class="card-img-top">
+        </section>
+
+        <section title="Rayuela - Julio Cortazar" class="libro card col-md-2">
+            <img src="~/Images/BooksCovers/cortazar-rayuela.png" alt="rayuela de cortazar" class="card-img-top">
+        </section>
+
+        <section title="Ficciones - Jorge Luis Borges" class="libro card col-md-2">
+            <img src="~/Images/BooksCovers/borges-ficciones.png" alt="ficciones de borges" class="card-img-top">
+        </section>
+
+        <section title="Martin Fierro - José Hernandez" class="libro card col-md-2">
+            <img src="~/Images/BooksCovers/hernandez-martin-fierro.png" alt="martin fierro de hernandez" class="card-img-top">
+        </section>
+
+        <section title="Boquitas Pintadas - Manuel Puig" class="libro card col-md-2">
+            <img src="~/Images/BooksCovers/puig-boquitas-pintadas.png" alt="boquitas pintadas de puig" class="card-img-top">
+        </section>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</article>
+
+<article class="contacto mt-5 p-5">
+    <h1 class="text-center pb-2">Contacto</h1>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.068715758423!2d-58.378057085195316!3d-34.602423864935744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacc473596c3%3A0x568d6d5f7f1f535d!2sEducaci%C3%B3n%20IT!5e0!3m2!1ses!2sar!4v1574825494204!5m2!1ses!2sar"
+            allowfullscreen=""></iframe>
+</article>
+
+<article class="menu d-flex justify-content-around align-items-center">
+    <a>@Html.ActionLink("Libros", "Mostrar", "Libro")</a>
+    <a>@Html.ActionLink("Autores", "Mostrar", "Autor")</a>
+    <a>@Html.ActionLink("Generos", "Mostrar", "Genero")</a>
+    <a>@Html.ActionLink("Editoriales", "Mostrar", "Editorial")</a>
+    <a>@Html.ActionLink("Niveles", "Mostrar", "Nivel")</a>
+    <a>@Html.ActionLink("Sobre Nosotros", "Index", "Home")</a>
+</article>

@@ -1,0 +1,184 @@
+/* RESETEOS Y REGLAS GENERALES */
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+}
+
+
+/* HEADER */
+
+header {
+    background-color: #1f2c13;
+    font-family: 'Sulphur Point', sans-serif;
+    color: white;
+    z-index: 9000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+header img {
+    filter: invert(100%) sepia(3%) saturate(0%) hue-rotate(258deg) brightness(106%) contrast(105%);
+    height: 90px;
+}
+
+header h1 {
+    margin-bottom: 0;
+}
+
+header a {
+    color: white;
+}
+
+/* NAV */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.menu-links {
+    background-color: #000702;
+    width: 300px;
+    height: 100%;
+    font-size: 30px;
+}
+
+nav a {
+    color: white;
+}
+
+nav a:hover {
+    font-weight: bolder;
+}
+
+.abierto {
+    left: 0;
+    transition: 0.3s;
+}
+
+
+/* MAIN */
+
+main {
+    z-index: -10;
+}
+
+
+footer {
+    position: relative;
+    bottom: 0;
+    background-color: #000702;
+    color: white;
+    width: 100%;
+}
+
+    footer p {
+        margin: 5px;
+    }
+
+
+/* CARRUSEL */
+
+.carrusel img {
+    display: block;
+    height: 300px;
+    line-height: 1;
+}
+
+
+/* LIBROS | CONTACTO */
+
+.libros h1 {
+    color: #a94802;
+    font-weight: bolder;
+}
+
+.libro {
+    margin: 10px;
+    padding: 0;
+}
+
+.libro:hover {
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+    opacity: 0.7;
+}
+
+.libro img {
+    height: 300px;
+}
+
+.contacto h1 {
+    color: white;
+    font-weight: bolder;
+}
+
+.contacto {
+    background-color: #5d612e;
+}
+
+.contacto iframe {
+    width: 450px;
+    height: 300px;
+    border: 0;
+    margin: 0 auto;
+}
+
+.menu {
+    background-color: #1f2c13;
+    height: 50px;
+}
+
+.menu a {
+    color: white;
+}
+
+/* FORMS */
+
+.formularios {
+    background-image: url(imagenes/biblioteca-2.jpg);
+    margin: 200px;
+}
+
+.formularios .card {
+    padding: 30px;
+    background-color: rgba(250, 250, 250, 0.80);
+}
+
+.formularios h2 {
+    color: #a94802;
+    font-weight: bolder;
+}
+
+.btn {
+    background-color: #1f2c13;
+    color: white;
+    float: right;
+}
+
+.btn:hover {
+    color: white;
+    font-weight: bolder;
+}

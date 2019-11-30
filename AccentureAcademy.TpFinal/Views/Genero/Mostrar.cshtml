@@ -2,25 +2,21 @@
 @model List<Generos>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Generos";
 }
 
-<!DOCTYPE html>
+<h2>Mostrar</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Mostrar Generos</title>
-</head>
-<body>
-    <h1>Generos</h1>
-    <div> 
-        <ul>
-            @foreach (Generos genero in this.Model)
-            {
-                <li>@genero.Genero</li>
-            }
-        </ul>
-    </div>
-</body>
-</html>
+@if (this.Model.Count > 0)
+{
+    <ul>
+        @foreach (Generos genero in this.Model)
+        {
+            <li>@genero.Genero</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No se encuentran generos para mostrar</p>
+}
