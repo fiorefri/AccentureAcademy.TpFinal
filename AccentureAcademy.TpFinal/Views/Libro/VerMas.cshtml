@@ -12,7 +12,12 @@
 
 <article class="mostrar-editar card container">
     <h2 class="card-header d-flex justify-content-center">@ViewBag.Titulo</h2>
-
+    
+    <div>
+        <a href="@Url.Action("Editar", null, new { id = libro.Id })" class="mr-3" title="Editar @libro.Titulo"><ion-icon name="create"></ion-icon></a>
+        <a href="@Url.Action("Eliminar", null, new { id = libro.Id})" class="trash-libro" data-toggle="modal" data-target="#Eliminar" title="Eliminar @libro.Titulo"><ion-icon name="trash" id="@libro.Id" ion-icon></a>
+    </div>
+    
     <div class="card-body container">
         <div class="form-group row">
             <h2 class="text-center">@Model.Titulo</h2>
@@ -72,4 +77,24 @@
     </div>
 </article>
 
-
+<script>
+    /* MODAL ELIMINAR AUTORES */
+    let botonEliminar = document.querySelectorAll(".trash-libro")
+    botonEliminar.forEach(boton => {
+        boton.addEventListener("click", click => {
+            let xml = new XMLHttpRequest()
+            xml.open("GET", "/Autor/JSONListaLibros")
+            xml.addEventListener("readystatechange", e => {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    let jsonParse = JSON.parse(e.target.response)
+                    for (var i = 0; i < jsonParse.length; i++) {
+                        if (jsonParse[i].Id == click.target.id) {
+                            document.querySelector(".mensaje-eliminar").innerHTML = `El libro ${jsonParse[i].Titulo}`
+                        }
+                    }
+                }
+            })
+            xml.send()
+        })
+    })
+    </script>
