@@ -34,7 +34,7 @@
                         <td id="editoriales"><a href="@Url.Action("LibrosEditorial", null, new { id = editorial.Id})">@editorial.Editorial</a></td>
                         <td class="editar-eliminar text-right">
                             <a href="@Url.Action("Editar", null, new { id = editorial.Id })" class="mr-3" title="Editar @editorial.Editorial"><ion-icon name="create"></ion-icon></a>
-                            <a href="@Url.Action("Eliminar", null, new { id = editorial.Id})" class="trash-editorial" data-toggle="modal" data-target="#Eliminar" title="Eliminar @editorial.Editorial"><ion-icon name="trash" id="@editorial.Id" ion-icon></a>
+                            <a href="@Url.Action("Eliminar", null, new { id = editorial.Id})" class="trash-editorial" title="Eliminar @editorial.Editorial"><ion-icon name="trash" id="@editorial.Id" ion-icon></a>
                         </td>
                     </tr>
                 }
