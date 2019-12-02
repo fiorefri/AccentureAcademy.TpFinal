@@ -80,7 +80,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         [HttpPost]
         public ActionResult Editar(Libros libro, IEnumerable<int> autores)
         {
-            Libros libroNuevo = db.Libros.Find(libro.id);
+            Libros libroNuevo = db.Libros.Find(libro.Id);
             libroNuevo.Autores.Clear();
 
             foreach (int autorActual in autores)
