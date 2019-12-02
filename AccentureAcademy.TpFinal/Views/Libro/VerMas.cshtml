@@ -16,7 +16,7 @@
     
     <div class="d-flex align-items-center justify-content-end m-2">
         <a href="@Url.Action("Editar", null, new { id = Model.Id })" class="mr-3" title="Editar @Model.Titulo"><ion-icon size="large" name="create"></ion-icon></a>
-        <a href="@Url.Action("Eliminar", null, new { id = Model.Id})" class="trash-libro" data-toggle="modal" data-target="#Eliminar" title="Eliminar @Model.Titulo"><ion-icon size="large" name="trash" id="@Model.Id" ion-icon></a>
+        <a href="@Url.Action("Eliminar", null, new { id = Model.Id})" class="trash-libro" title="Eliminar @Model.Titulo"><ion-icon size="large" name="trash" id="@Model.Id" ion-icon></a>
     </div>
     
     <div class="card-body container">
