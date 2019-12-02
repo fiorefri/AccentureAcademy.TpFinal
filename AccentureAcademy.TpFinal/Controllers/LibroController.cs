@@ -76,5 +76,32 @@ namespace AccentureAcademy.TpFinal.Controllers
 
             return View(libro);
         }
+        
+        [HttpPost]
+        public ActionResult Editar(Libros libro, IEnumerable<int> autores)
+        {
+            Libros libroNuevo = db.Libros.Find(libro.id);
+            libroNuevo.Autores.Clear();
+
+            foreach (int autorActual in autores)
+            {
+                Autores escritoPor = db.Autores.Find(autorActual);
+                libroNuevo.Autores.Add(escritoPor);
+            }
+
+            db.SaveChanges();
+
+            return View("Mostrar");
+        }
+
+        // Eliminar
+        public ActionResult Eliminar(int id)
+        {
+            Libros libro = db.Libros.Find(id);
+            db.Libros.Remove(libro);
+            db.SaveChanges();
+
+            return RedirectToAction("Mostrar");
+        }
     }
 }
