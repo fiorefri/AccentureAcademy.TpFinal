@@ -14,64 +14,47 @@
     <h2 class="card-header d-flex justify-content-center">@ViewBag.Titulo</h2>
     
     <div>
-        <a href="@Url.Action("Editar", null, new { id = libro.Id })" class="mr-3" title="Editar @libro.Titulo"><ion-icon name="create"></ion-icon></a>
-        <a href="@Url.Action("Eliminar", null, new { id = libro.Id})" class="trash-libro" data-toggle="modal" data-target="#Eliminar" title="Eliminar @libro.Titulo"><ion-icon name="trash" id="@libro.Id" ion-icon></a>
+        <a href="@Url.Action("Editar", null, new { id = Model.Id })" class="mr-3" title="Editar @Model.Titulo"><ion-icon name="create"></ion-icon></a>
+        <a href="@Url.Action("Eliminar", null, new { id = Model.Id})" class="trash-libro" data-toggle="modal" data-target="#Eliminar" title="Eliminar @Model.Titulo"><ion-icon name="trash" id="@Model.Id" ion-icon></a>
     </div>
     
     <div class="card-body container">
         <div class="form-group row">
             <h2 class="text-center">@Model.Titulo</h2>
-            <div class="col-md-6">
-                ISBN:
-            </div>
-            <div class="col-md-6">
-                @Model.ISBN
+            <div class="col-md-12">
+                <h3 class="col-md-4">ISBN:</h3>
+                <p class="col-md-8">@Model.ISBN</p>
             </div>
 
-            <div class="col-md-6">
-                Descripción:
-            </div>
-            <div class="col-md-6">
-                @Model.Descripcion
+            <div class="col-md-12">
+                <h3 class="col-md-4">Descripción:</h3>
+                <p class="col-md-8">@Model.Descripcion</p>
             </div>
 
-            <div class="col-md-6">
-                Género:
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
+                <h3 class="col-md-4">Género:</h3>
                 @foreach (Generos genero in generos)
                 {
                     if (Model.Id_Genero == genero.Id)
                     {
-                        @genero.Genero
+                        <p class="col-md-8">@genero.Genero</p>
                     }
                 }
             </div>
 
-            <div class="col-md-6">
-                Editoriales:
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
+                <h3>Editoriales:</h3>
                 @foreach (Editoriales editorial in editoriales)
                 {
                     if (Model.Id_Editorial == editorial.Id)
                     {
-                        @editorial.Editorial
+                        <p>@editorial.Editorial</p>
                     }
                 }
             </div>
 
-            <div class="col-md-6">
-                Autores:
-            </div>
-            <div class="col-md-6">
-                @foreach (WrittenBy genero in generos)
-                {
-                    if (Model.Id_Genero == genero.Id)
-                    {
-                        @genero.Genero
-                    }
-                }
+            <div class="col-md-12">
+                <h3>Autores:</h3>
             </div>
         </div>
     </div>
@@ -97,4 +80,4 @@
             xml.send()
         })
     })
-    </script>
+</script>
