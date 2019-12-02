@@ -81,6 +81,12 @@ namespace AccentureAcademy.TpFinal.Controllers
         public ActionResult Editar(Libros libro, IEnumerable<int> autores)
         {
             Libros libroNuevo = db.Libros.Find(libro.Id);
+            libroNuevo.ISBN = libro.ISBN;
+            libroNuevo.Titulo = libro.Titulo;
+            libroNuevo.Descripcion = libro.Descripcion;
+            libroNuevo.Id_Genero = libro.Id_Genero;
+            libroNuevo.Id_Editorial = libro.Id_Editorial;
+
             libroNuevo.Autores.Clear();
 
             foreach (int autorActual in autores)
@@ -91,7 +97,7 @@ namespace AccentureAcademy.TpFinal.Controllers
 
             db.SaveChanges();
 
-            return View("Mostrar");
+            return RedirectToAction("Mostrar");
         }
 
         // Eliminar
