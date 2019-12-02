@@ -1,4 +1,4 @@
-﻿@using AccentureAcademy.TpFinal.Models
+@using AccentureAcademy.TpFinal.Models
 @model Libros
 
 @{
@@ -7,54 +7,62 @@
     List<Autores> autores = db.Autores.ToList();
     List<Editoriales> editoriales = db.Editoriales.ToList();
     List<Generos> generos = db.Generos.ToList();
+    List<Libros> listaLibros = db.Libros.ToList();
 }
 
 
 <article class="mostrar-editar card container">
-    <h2 class="card-header d-flex justify-content-center">@ViewBag.Titulo</h2>
+    <h2 class="card-header d-flex justify-content-center">@Model.Titulo</h2>
     
-    <div>
-        <a href="@Url.Action("Editar", null, new { id = Model.Id })" class="mr-3" title="Editar @Model.Titulo"><ion-icon name="create"></ion-icon></a>
-        <a href="@Url.Action("Eliminar", null, new { id = Model.Id})" class="trash-libro" data-toggle="modal" data-target="#Eliminar" title="Eliminar @Model.Titulo"><ion-icon name="trash" id="@Model.Id" ion-icon></a>
+    <div class="d-flex align-items-center justify-content-end m-2">
+        <a href="@Url.Action("Editar", null, new { id = Model.Id })" class="mr-3" title="Editar @Model.Titulo"><ion-icon size="large" name="create"></ion-icon></a>
+        <a href="@Url.Action("Eliminar", null, new { id = Model.Id})" class="trash-libro" data-toggle="modal" data-target="#Eliminar" title="Eliminar @Model.Titulo"><ion-icon size="large" name="trash" id="@Model.Id" ion-icon></a>
     </div>
     
     <div class="card-body container">
         <div class="form-group row">
-            <h2 class="text-center">@Model.Titulo</h2>
-            <div class="col-md-12">
-                <h3 class="col-md-4">ISBN:</h3>
-                <p class="col-md-8">@Model.ISBN</p>
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">ISBN:</h3>
+                <p class="col-md-9">@Model.ISBN</p>
             </div>
 
-            <div class="col-md-12">
-                <h3 class="col-md-4">Descripción:</h3>
-                <p class="col-md-8">@Model.Descripcion</p>
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">Descripción:</h3>
+                <p class="col-md-9">@Model.Descripcion</p>
             </div>
 
-            <div class="col-md-12">
-                <h3 class="col-md-4">Género:</h3>
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">Género:</h3>
                 @foreach (Generos genero in generos)
                 {
                     if (Model.Id_Genero == genero.Id)
                     {
-                        <p class="col-md-8">@genero.Genero</p>
+                        <p class="col-md-9">@genero.Genero</p>
                     }
                 }
             </div>
 
-            <div class="col-md-12">
-                <h3>Editoriales:</h3>
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">Editoriales:</h3>
                 @foreach (Editoriales editorial in editoriales)
                 {
                     if (Model.Id_Editorial == editorial.Id)
                     {
-                        <p>@editorial.Editorial</p>
+                        <p class="col-md-9">@editorial.Editorial</p>
                     }
                 }
             </div>
 
-            <div class="col-md-12">
-                <h3>Autores:</h3>
+            <div class="col-md-12 d-flex justify-content-around d-inline flex-wrap">
+                <h3 class="col-md-3">Autores:</h3>
+                @foreach (Libros libro in listaLibros)
+                {
+                    foreach (Autores autor in libro.Autores)
+                    {
+
+                        <p class="col-md-9">@autor.NombreAutor,</p>
+                    }
+                }
             </div>
         </div>
     </div>
