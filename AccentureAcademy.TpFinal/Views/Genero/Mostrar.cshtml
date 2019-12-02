@@ -32,7 +32,7 @@
                         <td id="generos"><a href="@Url.Action("LibrosGenero", null, new { id = genero.Id})">@genero.Genero</a></td>
                         <td class="editar-eliminar text-right">
                             <a href="@Url.Action("Editar", null, new { id = genero.Id })" class="mr-3" title="Editar @genero.Genero"><ion-icon name="create"></ion-icon></a>
-                            <a href="@Url.Action("Eliminar", null, new { id = genero.Id})" class="trash-genero" data-toggle="modal" data-target="#Eliminar" title="Eliminar @genero.Genero"><ion-icon name="trash" id="@genero.Id" ion-icon></a>
+                            <a href="@Url.Action("Eliminar", null, new { id = genero.Id})" class="trash-genero" title="Eliminar @genero.Genero"><ion-icon name="trash" id="@genero.Id" ion-icon></a>
                         </td>
                     </tr>
                 }
