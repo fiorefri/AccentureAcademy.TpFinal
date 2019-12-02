@@ -2,12 +2,20 @@
 @model List<Editoriales>
 
 @{
-    ViewBag.Title = "Editoriales";
+                /**/
+
+                ViewBag.Title = "Editoriales";
 }
 
 <article class="mostrar-editar card container">
-    <h2 class="card-header d-flex justify-content-center">Mostrar</h2>
-    <section class="d-flex align-items-center justify-content-end m-2" title="Agregar Nueva Editorial"><a href="@Url.Action("Agregar", "Editorial")"><ion-icon name="add" size="large"></ion-icon></a></section>
+    <h2 class="card-header d-flex justify-content-around">@ViewBag.Titulo</h2>
+    <section class="d-flex align-items-center justify-content-between m-2" title="Agregar Nueva Editorial">
+        <form id="buscar-editorial">
+            <input type="text" placeholder="Buscar editoriales..." class="form-control col-xs-10" />
+        </form>
+
+        <a href="@Url.Action("Agregar")"><ion-icon name="add" size="large"></ion-icon></a>
+    </section>
 
     @if (this.Model.Count > 0)
     {
@@ -18,22 +26,93 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+
+            <tbody scope="row">
                 @foreach (Editoriales editorial in this.Model)
                 {
-                    <tr>
-                        <td>@editorial.Editorial</td>
-                        <td class="text-right">
-                            @Html.ActionLink("Editar", "Editar", new { id = editorial.Id }, new { @class="mr-3" })
-                            @Html.ActionLink("Eliminar", "Eliminar", new { id = editorial.Id })
+                    <tr id="row-editoriales">
+                        <td id="editoriales"><a href="@Url.Action("LibrosEditorial", null, new { id = editorial.Id})">@editorial.Editorial</a></td>
+                        <td class="editar-eliminar text-right">
+                            <a href="@Url.Action("Editar", null, new { id = editorial.Id })" class="mr-3" title="Editar @editorial.Editorial"><ion-icon name="create"></ion-icon></a>
+                            <a href="@Url.Action("Eliminar", null, new { id = editorial.Id})" class="trash-editorial" data-toggle="modal" data-target="#Eliminar" title="Eliminar @editorial.Editorial"><ion-icon name="trash" id="@editorial.Id" ion-icon></a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+
     }
     else
     {
         <p>No se encuentran editoriales para mostrar</p>
     }
 </article>
+
+
+<div class="modal fade" id="Eliminar" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="Eliminar">¿Está seguro que desea eliminar?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="mensaje-eliminar modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* MODAL ELIMINAR EDITORIALEES */
+    let botonEliminar = document.querySelectorAll(".trash-editorial")
+
+    botonEliminar.forEach(boton => {
+        boton.addEventListener("click", click => {
+            let xml = new XMLHttpRequest()
+            xml.open("GET", "/Autor/JSONListaEditoriales")
+
+            xml.addEventListener("readystatechange", e => {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    let jsonParse = JSON.parse(e.target.response)
+
+                    for (var i = 0; i < jsonParse.length; i++) {
+                        if (jsonParse[i].Id == click.target.id) {
+                            document.querySelector(".mensaje-eliminar").innerHTML = `La editorial ${jsonParse[i].Editorial}`
+                        }
+                    }
+                }
+            })
+
+            xml.send()
+        })
+    })
+
+    /* BUSCAR */
+    let buscarEditorial = document.forms['buscar-editorial'].querySelector('input')
+    let listaEditoriales = document.querySelectorAll("#editoriales")
+    let rowEditoriales = document.querySelectorAll("#row-editoriales")
+
+    buscarEditorial.addEventListener("keyup", e => {
+        let valor = e.target.value.toLowerCase()
+
+        for (var i = 0; i < listaEditoriales.length; i++) {
+            let nombre = listaEditoriales[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowEditoriales[i].style.display = "block"
+            } else {
+                rowEditoriales[i].style.display = "none"
+            }
+        }
+    })
+</script>

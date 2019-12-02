@@ -40,9 +40,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ISBN" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Titulo" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Imagen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Id_Genero" Type="int" Nullable="false" />
           <Property Name="Id_Editorial" Type="int" Nullable="false" />
         </EntityType>
@@ -177,9 +176,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ISBN" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Imagen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Id_Genero" Type="Int32" Nullable="false" />
           <Property Name="Id_Editorial" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Editoriales" Relationship="AccentureAcademy.DBModel.FK_LIBROS_EDITORIALES" FromRole="Libros" ToRole="Editoriales" />
@@ -253,7 +251,6 @@
               <MappingFragment StoreEntitySet="Libros">
                 <ScalarProperty Name="Id_Editorial" ColumnName="Id_Editorial" />
                 <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="ISBN" ColumnName="ISBN" />

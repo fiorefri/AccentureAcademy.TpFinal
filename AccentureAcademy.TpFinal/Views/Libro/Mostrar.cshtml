@@ -11,61 +11,133 @@
 
 <article class="mostrar-editar card container">
     <h2 class="card-header d-flex justify-content-center">Mostrar</h2>
-    <section class="d-flex align-items-center justify-content-end m-2" title="Agregar Nuevo Libro"><a href="@Url.Action("Agregar", "Libro")"><ion-icon name="add" size="large"></ion-icon></a></section>
+    <section class="d-flex align-items-center justify-content-between m-2" title="Agregar Nuevo Libro">
+        <form id="buscar-libro">
+            <input type="text" placeholder="Buscar libros..." class="form-control col-xs-10" />
+        </form>
 
-    @if (this.Model.Count > 0)
-    {
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Título</th>
-                    <th scope="col">ISBN</th>
-                    <th scope="col">Género</th>
-                    <th scope="col">Editorial</th>
-                    <th scope="col">Autor/es</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Libros libro in this.Model)
-                {
+        <a href="@Url.Action("Agregar")"><ion-icon name="add" size="large"></ion-icon></a>
+    </section>
+
+    <section class="libros">
+        @if (this.Model.Count > 0)
+        {
+            <table class="table table-hover table-striped">
+                <thead>
                     <tr>
-                        <td>@libro.Titulo</td>
-                        <td>@libro.ISBN</td>
-
-                        @foreach (Generos genero in generos)
-                        {
-                            if (libro.Id_Genero == genero.Id)
-                            {
-                                <td>@genero.Genero</td>
-                            }
-                        }
-
-                        @foreach (Editoriales editorial in editoriales)
-                        {
-                            if (libro.Id_Editorial == editorial.Id)
-                            {
-                                <td>@editorial.Editorial</td>
-                            }
-                        }
-
-                        <td>
-                            @foreach (Autores autor in libro.Autores) {
-                                <div>@autor.NombreAutor</div>
-                            }
-                        </td>
-
-                        <td class="text-right">
-                            @Html.ActionLink("Editar", "Editar", new { id = libro.Id }, new { @class = "mr-3" })
-                            @Html.ActionLink("Eliminar", "Eliminar", new { id = libro.Id })
-                        </td>
+                        <th scope="col">Título</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Género</th>
+                        <th scope="col">Editorial</th>
+                        <th scope="col">Autor/es</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No se encuentran libros para mostrar</p>
-    }
+                </thead>
+                <tbody>
+                    @foreach (Libros libro in this.Model)
+                    {
+                        <tr class="row-libros">
+                            <td id="libros"><a href="@Url.Action("VerMas", "Libro", new { id = libro.Id })">@libro.Titulo</a></td>
+                            <td id="ISBN">@libro.ISBN</td>
+
+                            <td id="generos">
+                                @foreach (Generos genero in generos)
+                                {
+                                    if (libro.Id_Genero == genero.Id)
+                                    {
+                                        <a href="@Url.Action("LibrosGenero", "Genero", new { id = genero.Id })">@genero.Genero</a>
+                                    }
+                                }
+                            </td>
+
+                            <td id="editoriales">
+                                @foreach (Editoriales editorial in editoriales)
+                                {
+                                    if (libro.Id_Editorial == editorial.Id)
+                                    {
+                                        <a href="@Url.Action("LibrosGenero", "Editorial", new { id = editorial.Id })">@editorial.Editorial</a>
+                                    }
+                                }
+                            </td>
+
+                            <td id="autores">
+                                @foreach (Autores autor in libro.Autores)
+                                {
+                                    <a href="@Url.Action("LibrosAutor", "Autor", new { id = autor.Id })">@autor.NombreAutor</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No se encuentran libros para mostrar</p>
+        }
+    </section>
 </article>
+
+<script>
+    /* BUSCAR */
+    let buscarLibro = document.forms['buscar-libro'].querySelector('input')
+    let listaLibros = document.querySelectorAll("#libros")
+    let listaISBN = document.querySelectorAll("#ISBN")
+    let listaGenero = document.querySelectorAll("#generos")
+    let listaEditoriales = document.querySelectorAll("#editoriales")
+    let listaAutores = document.querySelectorAll("#autores")
+    let rowLibros = document.querySelectorAll("#row-editoriales")
+
+    buscarEditorial.addEventListener("keyup", e => {
+        let valor = e.target.value.toLowerCase()
+
+        for (var i = 0; i < listaLibros.length; i++) {
+            let nombre = listaLibros[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowLibros[i].style.display = "block"
+            } else {
+                rowLibros[i].style.display = "none"
+            }
+        }
+
+        for (var i = 0; i < listaISBN.length; i++) {
+            let nombre = listaISBN[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowLibros[i].style.display = "block"
+            } else {
+                rowLibros[i].style.display = "none"
+            }
+        }
+
+        for (var i = 0; i < listaGeneros.length; i++) {
+            let nombre = listaGeneros[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowLibros[i].style.display = "block"
+            } else {
+                rowLibros[i].style.display = "none"
+            }
+        }
+
+        for (var i = 0; i < listaEditoriales.length; i++) {
+            let nombre = listaEditoriales[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowLibros[i].style.display = "block"
+            } else {
+                rowLibros[i].style.display = "none"
+            }
+        }
+
+        for (var i = 0; i < listaAutores.length; i++) {
+            let nombre = listaAutores[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowLibros[i].style.display = "block"
+            } else {
+                rowLibros[i].style.display = "none"
+            }
+        }
+    })
+</script>

@@ -6,8 +6,14 @@
 }
 
 <article class="mostrar-editar card container">
-    <h2 class="card-header d-flex justify-content-center">@ViewBag.Titulo</h2>
-    <section class="d-flex align-items-center justify-content-end m-2" title="Agregar Nuevo Autor"><a href="@Url.Action("Agregar")"><ion-icon name="add" size="large"></ion-icon></a></section>
+    <h2 class="card-header d-flex justify-content-around">@ViewBag.Titulo</h2>
+    <section class="d-flex align-items-center justify-content-between m-2" title="Agregar Nuevo Autor">
+        <form id="buscar-autor">
+            <input type="text" placeholder="Buscar autores..." class="form-control col-xs-10" />
+        </form>
+
+        <a href="@Url.Action("Agregar")"><ion-icon name="add" size="large"></ion-icon></a>
+    </section>
 
     @if (this.Model.Count > 0)
     {
@@ -18,43 +24,20 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+
+            <tbody scope="row">
                 @foreach (Autores autor in this.Model)
                 {
-                    <tr>
-                        <td>@autor.NombreAutor</td>
-                        <td class="text-right">
+                    <tr id="row-autores">
+                        <td id="autores"><a href="@Url.Action("LibrosAutor", null, new { id = autor.Id})">@autor.NombreAutor</a></td>
+                        <td class="editar-eliminar text-right">
                             <a href="@Url.Action("Editar", null, new { id = autor.Id })" class="mr-3" title="Editar @autor.NombreAutor"><ion-icon name="create"></ion-icon></a>
-                            <a><ion-icon name="trash"></ion-icon></a>
+                            <a href="@Url.Action("Eliminar", null, new { id = autor.Id})" class="trash-actor" data-toggle="modal" data-target="#Eliminar" title="Eliminar @autor.NombreAutor"><ion-icon name="trash" id="@autor.Id" ion-icon></a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-
-        <div class="modal fade" id="Eliminar" tabindex="-1">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="Eliminar">Eliminar</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @foreach (Autores autor in this.Model)
-                    {
-                        <div class="modal-body">
-
-                            ¿Estás seguro de eliminar a @autor.NombreAutor?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">@Html.ActionLink("Aceptar", "Eliminar", new { id = autor.Id })</button>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
 
     }
     else
@@ -63,3 +46,71 @@
     }
 </article>
 
+
+<div class="modal fade" id="Eliminar" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="Eliminar">¿Está seguro que desea eliminar?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="mensaje-eliminar modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                 <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* MODAL ELIMINAR AUTORES */
+    let botonEliminar = document.querySelectorAll(".trash-actor")
+
+    botonEliminar.forEach(boton => {
+        boton.addEventListener("click", click => {
+            let xml = new XMLHttpRequest()
+            xml.open("GET", "/Autor/JSONListaAutores")
+
+            xml.addEventListener("readystatechange", e => {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    let jsonParse = JSON.parse(e.target.response)
+
+                    for (var i = 0; i < jsonParse.length; i++) {
+                        if (jsonParse[i].Id == click.target.id) {
+                            document.querySelector(".mensaje-eliminar").innerHTML = `El autor ${jsonParse[i].NombreAutor}`
+                        }
+                    }
+                }
+            })
+
+            xml.send()
+        })
+    })
+
+    /* BUSCAR */
+    let buscarAutor = document.forms['buscar-autor'].querySelector('input')
+    let listaAutores = document.querySelectorAll("#autores")
+    let rowAutores = document.querySelectorAll("#row-autores")
+
+    buscarAutor.addEventListener("keyup", e => {
+        let valor = e.target.value.toLowerCase()
+
+        for (var i = 0; i < listaAutores.length; i++) {
+            let nombre = listaAutores[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowAutores[i].style.display = "block"
+            } else {
+                rowAutores[i].style.display = "none"
+            }
+        }
+    })
+</script>

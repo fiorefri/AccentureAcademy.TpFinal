@@ -6,34 +6,111 @@
 }
 
 <article class="mostrar-editar card container">
-    <h2 class="card-header d-flex justify-content-center">Mostrar</h2>
-    <section class="d-flex align-items-center justify-content-end m-2" title="Agregar Nuevo Género"><a href="@Url.Action("Agregar", "Genero")"><ion-icon name="add" size="large"></ion-icon></a></section>
+    <h2 class="card-header d-flex justify-content-around">@ViewBag.Titulo</h2>
+    <section class="d-flex align-items-center justify-content-between m-2" title="Agregar Nuevo Género">
+        <form id="buscar-genero">
+            <input type="text" placeholder="Buscar generos..." class="form-control col-xs-10" />
+        </form>
+
+        <a href="@Url.Action("Agregar")"><ion-icon name="add" size="large"></ion-icon></a>
+    </section>
 
     @if (this.Model.Count > 0)
     {
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Géneros</th>
+                    <th scope="col">Nombre Autor</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+
+            <tbody scope="row">
                 @foreach (Generos genero in this.Model)
                 {
-                    <tr>
-                        <td>@genero.Genero</td>
-                        <td class="text-right">
-                            @Html.ActionLink("Editar", "Editar", new { id = genero.Id }, new { @class = "mr-3" })
-                            @Html.ActionLink("Eliminar", "Eliminar", new { id = genero.Id })
+                    <tr id="row-generos">
+                        <td id="generos"><a href="@Url.Action("LibrosGenero", null, new { id = genero.Id})">@genero.Genero</a></td>
+                        <td class="editar-eliminar text-right">
+                            <a href="@Url.Action("Editar", null, new { id = genero.Id })" class="mr-3" title="Editar @genero.Genero"><ion-icon name="create"></ion-icon></a>
+                            <a href="@Url.Action("Eliminar", null, new { id = genero.Id})" class="trash-genero" data-toggle="modal" data-target="#Eliminar" title="Eliminar @genero.Genero"><ion-icon name="trash" id="@genero.Id" ion-icon></a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+
     }
     else
     {
-        <p>No se encuentran géneros para mostrar</p>
+        <p>No se encuentran autores para mostrar</p>
     }
 </article>
+
+
+<div class="modal fade" id="Eliminar" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="Eliminar">¿Está seguro que desea eliminar?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="mensaje-eliminar modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* MODAL ELIMINAR AUTORES */
+    let botonEliminar = document.querySelectorAll(".trash-genero")
+
+    botonEliminar.forEach(boton => {
+        boton.addEventListener("click", click => {
+            let xml = new XMLHttpRequest()
+            xml.open("GET", "/Autor/JSONListaGeneros")
+
+            xml.addEventListener("readystatechange", e => {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    let jsonParse = JSON.parse(e.target.response)
+
+                    for (var i = 0; i < jsonParse.length; i++) {
+                        if (jsonParse[i].Id == click.target.id) {
+                            document.querySelector(".mensaje-eliminar").innerHTML = `El género ${jsonParse[i].Genero}`
+                        }
+                    }
+                }
+            })
+
+            xml.send()
+        })
+    })
+
+    /* BUSCAR */
+    let buscarGenero = document.forms['buscar-genero'].querySelector('input')
+    let listaGeneros = document.querySelectorAll("#generos")
+    let rowGeneros = document.querySelectorAll("#row-generos")
+
+    buscarGenero.addEventListener("keyup", e => {
+        let valor = e.target.value.toLowerCase()
+
+        for (var i = 0; i < listaGeneros.length; i++) {
+            let nombre = listaGeneros[i].textContent
+
+            if (nombre.toLowerCase().indexOf(valor) != -1) {
+                rowGeneros[i].style.display = "block"
+            } else {
+                rowGeneros[i].style.display = "none"
+            }
+        }
+    })
+</script>

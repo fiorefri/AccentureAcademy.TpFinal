@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccentureAcademy.TpFinal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,12 @@ namespace AccentureAcademy.TpFinal.Controllers
 {
     public class HomeController : Controller
     {
+        private AccentureAcademyDBEntities db;
+        public HomeController()
+        {
+            var db = new AccentureAcademyDBEntities();
+        } 
+
         public ActionResult Index()
         {
             return View();
@@ -20,11 +27,13 @@ namespace AccentureAcademy.TpFinal.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public JsonResult ListaLibrosJSON()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return Json(db.Libros.Select(libro => new {
+                Id = libro.Id,
+                Titulo = libro.Titulo,
+                ISBN = libro.ISBN
+            }).ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }

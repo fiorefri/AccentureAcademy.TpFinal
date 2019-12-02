@@ -16,6 +16,12 @@ namespace AccentureAcademy.TpFinal.Controllers
             db = new AccentureAcademyDBEntities();
         }
 
+        // Json 
+        public JsonResult JSONListaLibros()
+        {
+            return Json(db.Libros.Select(lib => new { Id = lib.Id, Titulo = lib.Titulo, ISBN = lib.ISBN }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         // Mostrar
         public ActionResult Mostrar()
         {
@@ -24,6 +30,14 @@ namespace AccentureAcademy.TpFinal.Controllers
 
             return View(libros);
         }
+
+        // Ver Mas
+        public ActionResult VerMas(int id)
+        {
+            Libros libro = db.Libros.Find(id);
+
+            return View(libro);
+        } 
 
         // Agregar
         public ActionResult Agregar()

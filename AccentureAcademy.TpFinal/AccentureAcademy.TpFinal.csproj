@@ -156,15 +156,19 @@
     <Compile Include="Models\Autores.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutoresMetadata.cs" />
     <Compile Include="Models\Editoriales.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditorialesMetadata.cs" />
     <Compile Include="Models\Generos.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenerosMetadata.cs" />
     <Compile Include="Models\Libros.cs">
       <DependentUpon>AccentureAcademy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LibrosMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,17 +183,20 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\author.jpg" />
     <Content Include="Images\biblioteca-1.jpg" />
     <Content Include="Images\biblioteca-2.jpg" />
     <Content Include="Images\biblioteca-3.jpg" />
     <Content Include="Images\biblioteca-4.jpg" />
     <Content Include="Images\biblioteca-5.jpg" />
+    <Content Include="Images\book.jpg" />
     <Content Include="Images\BooksCovers\arlt-juguete-rabioso.png" />
     <Content Include="Images\BooksCovers\bioy-casares-invencion-morel.png" />
     <Content Include="Images\BooksCovers\borges-ficciones.png" />
     <Content Include="Images\BooksCovers\cortazar-rayuela.png" />
     <Content Include="Images\BooksCovers\hernandez-martin-fierro.png" />
     <Content Include="Images\BooksCovers\puig-boquitas-pintadas.png" />
+    <Content Include="Images\editorial.png" />
     <Content Include="Images\photo_2019-11-25_21-44-12.jpg" />
     <Content Include="Images\photo_2019-11-25_21-44-26.jpg" />
     <Content Include="Images\photo_2019-11-25_21-44-39.jpg" />
@@ -293,6 +300,7 @@
     <Content Include="Views\Editorial\Editar.cshtml" />
     <Content Include="Views\Genero\Editar.cshtml" />
     <Content Include="Views\Libro\Editar.cshtml" />
+    <Content Include="Views\Libro\VerMas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,8 +8,8 @@
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Rubik|Sulphur+Point&display=swap" rel="stylesheet">
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <link href="~/Content/Style.css" rel="stylesheet" />
@@ -30,20 +30,27 @@
                 @Html.ActionLink("Autores", "Mostrar", "Autor")
                 @Html.ActionLink("Géneros", "Mostrar", "Genero")
                 @Html.ActionLink("Editoriales", "Mostrar", "Editorial")
-                @Html.ActionLink("Sobre Nosotros", "Index", "Home")
             </div>
         </div>
     </nav>
 
     <main>
         @RenderBody()
+
+        <article class="menu d-flex justify-content-around align-items-center">
+            @Html.ActionLink("Libros", "Mostrar", "Libro")
+            @Html.ActionLink("Autores", "Mostrar", "Autor")
+            @Html.ActionLink("Géneros", "Mostrar", "Genero")
+            @Html.ActionLink("Editoriales", "Mostrar", "Editorial")
+            @Html.ActionLink("Niveles", "Mostrar", "Nivel")
+        </article>
     </main>
 
     <footer class="d-flex justify-content-center">
         <p>&copy; Trabajo Práctico para Accenture Argentina 2019</p>
     </footer>
 
-    <script src="~/Scripts/Script.js"></script>
+    <script src="~/Scripts/Script.js" charset="UTF-8"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>

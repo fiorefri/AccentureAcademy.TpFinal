@@ -15,7 +15,13 @@ namespace AccentureAcademy.TpFinal.Controllers
         {
             db = new AccentureAcademyDBEntities();
         }
-        
+
+        // Json
+        public JsonResult JSONListaGeneros()
+        {
+            return Json(db.Generos.Select(gen => new { Id = gen.Id, Genero = gen.Genero }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         // Mostrar
         public ActionResult Mostrar()
         {

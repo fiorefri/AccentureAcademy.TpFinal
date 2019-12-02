@@ -16,6 +16,12 @@ namespace AccentureAcademy.TpFinal.Controllers
             db = new AccentureAcademyDBEntities();
         }
 
+        // Json 
+        public JsonResult JSONListaAutores()
+        {
+            return Json(db.Autores.Select(aut => new { Id = aut.Id, NombreAutor = aut.NombreAutor }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         // Mostrar
         public ActionResult Mostrar()
         {

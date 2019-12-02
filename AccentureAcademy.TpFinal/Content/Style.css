@@ -174,3 +174,20 @@ footer {
     font-size: 25px;
 }
 
+.filtros div {
+    padding: 10px 0;
+}
+
+.filtros ul {
+    list-style-type: none;
+    padding-left: 15px;
+}
+
+/* FORMS */
+form a {
+    color:black;
+}
+
+form a:hover {
+    color: #d4903b;
+}
