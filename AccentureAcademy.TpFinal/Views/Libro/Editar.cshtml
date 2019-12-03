@@ -64,7 +64,7 @@
                 <div class="form-control col-md-7" name="Id_Editorial">
                     @if (this.Model != null)
                     {
-                        <select class="form-control" name="Id_Editoriales">
+                        <select class="form-control" name="Id_Editorial">
                             @foreach (Editoriales editorial in editoriales)
                             {
                                 <option @(Model.Id_Editorial.Equals(editorial.Id) ? "selected" : "")
@@ -77,7 +77,7 @@
                     }
                     else
                     {
-                        <select class="form-control" name="Id_Editoriales">
+                        <select class="form-control" name="Id_Editorial">
                             <option selected>Seleccione una editorial...</option>
                             @foreach (Editoriales editorial in editoriales)
                             {

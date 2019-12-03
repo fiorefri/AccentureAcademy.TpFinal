@@ -11,7 +11,7 @@ namespace AccentureAcademy.TpFinal.Models
     {
         [Required(ErrorMessage = "El ISBN es requerido")]
         [Index("UQ_ISBN")]
-        [Range(1, 25, ErrorMessage = "El ISBN tiene que estar entre 1 y 25 caracteres numéricos")]
+        [StringLength(25, MinimumLength = 1, ErrorMessage = "El ISBN tiene que estar entre 1 y 25 caracteres")]
         public string ISBN { get; set; }
 
         [Required(ErrorMessage = "El título es requerido")]

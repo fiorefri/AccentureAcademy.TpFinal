@@ -25,7 +25,7 @@ namespace AccentureAcademy.TpFinal.Controllers
         // Mostrar
         public ActionResult Mostrar()
         {
-            List<Libros> libros = db.Libros.ToList();
+            List<Libros> libros = db.Libros.OrderBy(lib => lib.Titulo).ToList();
             ViewBag.Titulo = "Ver Libros";
 
             return View(libros);
