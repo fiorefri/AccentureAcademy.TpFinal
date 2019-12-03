@@ -1,4 +1,4 @@
-﻿@using AccentureAcademy.TpFinal.Models
+@using AccentureAcademy.TpFinal.Models
 @model Libros
 
 @{
@@ -35,21 +35,57 @@
                     <div style="color:red;">@Html.ValidationMessageFor(libro => libro.Descripcion)</div>
                 </div>
 
-                <select class="form-control col-md-6" name="Id_Genero">
-                    <option selected>Seleccione un género</option>
-                    @foreach (Generos genero in generos)
+                <div class="form-control col-md-7" id="Id_Genero">
+                    @if (this.Model != null)
                     {
-                        <option value="@genero.Id">@genero.Genero</option>
-                    }
-                </select>
+                        <select class="form-control" name="autores">
+                            @foreach (Generos genero in generos)
+                            {
+                                <option @(Model.Id_Genero.Equals(genero.Id) ? "selected" : "")
+                                        value="@genero.Id">
+                                    @genero.Genero
+                                </option>
+                            }
+                        </select>
 
-                <select class="form-control col-md-6" name="Id_Editorial">
-                    <option selected>Seleccione un género</option>
-                    @foreach (Editoriales editorial in editoriales)
-                    {
-                        <option value="@editorial.Id">@editorial.Editorial</option>
                     }
-                </select>
+                    else
+                    {
+                        <select class="form-control" name="autores">
+                            <option selected>Seleccione un género...</option>
+                            @foreach (Generos genero in generos)
+                            {
+                                <option value="@genero.Id">@genero.Genero</option>
+                            }
+                        </select>
+                    }
+                </div>
+
+                <div class="form-control col-md-7" name="Id_Editorial">
+                    @if (this.Model != null)
+                    {
+                        <select class="form-control" name="autores">
+                            @foreach (Editoriales editorial in editoriales)
+                            {
+                                <option @(Model.Id_Editorial.Equals(editorial.Id) ? "selected" : "")
+                                        value="@editorial.Id">
+                                    @editorial.Editorial
+                                </option>
+                            }
+                        </select>
+
+                    }
+                    else
+                    {
+                        <select class="form-control" name="autores">
+                            <option selected>Seleccione una editorial...</option>
+                            @foreach (Editoriales editorial in editoriales)
+                            {
+                                <option value="@editorial.Id">@editorial.Editorial</option>
+                            }
+                        </select>
+                    }
+                </div>
 
                 <div id="listaAutores">
                     @if (this.Model != null)

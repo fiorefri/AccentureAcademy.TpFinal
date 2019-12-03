@@ -47,7 +47,6 @@ namespace AccentureAcademy.TpFinal.Controllers
                 return Content("No se pudo ingresar la editorial a la base de datos. Pruebe nuevamente");
             }
 
-            var db = new AccentureAcademyDBEntities();
             db.Editoriales.Add(nuevaEditorial);
             db.SaveChanges();
 

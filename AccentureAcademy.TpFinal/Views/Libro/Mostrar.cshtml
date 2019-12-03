@@ -62,7 +62,7 @@
                             <td id="autores">
                                 @foreach (Autores autor in libro.Autores)
                                 {
-                                    <a href="@Url.Action("LibrosAutor", "Autor", new { id = autor.Id })">@autor.NombreAutor</a>
+                                    <a href="@Url.Action("LibrosAutor", "Autor", new { id = autor.Id })">@autor.NombreAutor</a><br />
                                 }
                             </td>
                         </tr>

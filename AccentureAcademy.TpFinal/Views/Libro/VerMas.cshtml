@@ -1,4 +1,4 @@
-﻿@using AccentureAcademy.TpFinal.Models
+@using AccentureAcademy.TpFinal.Models
 @model Libros
 
 @{
@@ -7,64 +7,60 @@
     List<Autores> autores = db.Autores.ToList();
     List<Editoriales> editoriales = db.Editoriales.ToList();
     List<Generos> generos = db.Generos.ToList();
+    List<Libros> listaLibros = db.Libros.ToList();
 }
 
 
 <article class="mostrar-editar card container">
-    <h2 class="card-header d-flex justify-content-center">@ViewBag.Titulo</h2>
-
+    <h2 class="card-header d-flex justify-content-center">@Model.Titulo</h2>
+    
+    <div class="d-flex align-items-center justify-content-end m-2">
+        <a href="@Url.Action("Editar", null, new { id = Model.Id })" class="mr-3" title="Editar @Model.Titulo"><ion-icon size="large" name="create"></ion-icon></a>
+        <a href="@Url.Action("Eliminar", null, new { id = Model.Id})" class="trash-libro" title="Eliminar @Model.Titulo"><ion-icon size="large" name="trash" id="@Model.Id" ion-icon></a>
+    </div>
+    
     <div class="card-body container">
         <div class="form-group row">
-            <h2 class="text-center">@Model.Titulo</h2>
-            <div class="col-md-6">
-                ISBN:
-            </div>
-            <div class="col-md-6">
-                @Model.ISBN
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">ISBN:</h3>
+                <p class="col-md-9">@Model.ISBN</p>
             </div>
 
-            <div class="col-md-6">
-                Descripción:
-            </div>
-            <div class="col-md-6">
-                @Model.Descripcion
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">Descripción:</h3>
+                <p class="col-md-9">@Model.Descripcion</p>
             </div>
 
-            <div class="col-md-6">
-                Género:
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">Género:</h3>
                 @foreach (Generos genero in generos)
                 {
                     if (Model.Id_Genero == genero.Id)
                     {
-                        @genero.Genero
+                        <p class="col-md-9">@genero.Genero</p>
                     }
                 }
             </div>
 
-            <div class="col-md-6">
-                Editoriales:
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12 d-flex justify-content-around">
+                <h3 class="col-md-3">Editoriales:</h3>
                 @foreach (Editoriales editorial in editoriales)
                 {
                     if (Model.Id_Editorial == editorial.Id)
                     {
-                        @editorial.Editorial
+                        <p class="col-md-9">@editorial.Editorial</p>
                     }
                 }
             </div>
 
-            <div class="col-md-6">
-                Autores:
-            </div>
-            <div class="col-md-6">
-                @foreach (WrittenBy genero in generos)
+            <div class="col-md-12 d-flex justify-content-around d-inline flex-wrap">
+                <h3 class="col-md-3">Autores:</h3>
+                @foreach (Libros libro in listaLibros)
                 {
-                    if (Model.Id_Genero == genero.Id)
+                    foreach (Autores autor in libro.Autores)
                     {
-                        @genero.Genero
+
+                        <p class="col-md-9">@autor.NombreAutor,</p>
                     }
                 }
             </div>
@@ -72,4 +68,24 @@
     </div>
 </article>
 
-
+<script>
+    /* MODAL ELIMINAR AUTORES */
+    let botonEliminar = document.querySelectorAll(".trash-libro")
+    botonEliminar.forEach(boton => {
+        boton.addEventListener("click", click => {
+            let xml = new XMLHttpRequest()
+            xml.open("GET", "/Autor/JSONListaLibros")
+            xml.addEventListener("readystatechange", e => {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    let jsonParse = JSON.parse(e.target.response)
+                    for (var i = 0; i < jsonParse.length; i++) {
+                        if (jsonParse[i].Id == click.target.id) {
+                            document.querySelector(".mensaje-eliminar").innerHTML = `El libro ${jsonParse[i].Titulo}`
+                        }
+                    }
+                }
+            })
+            xml.send()
+        })
+    })
+</script>
