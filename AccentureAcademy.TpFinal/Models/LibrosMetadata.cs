@@ -24,9 +24,6 @@ namespace AccentureAcademy.TpFinal.Models
         [StringLength(1000, MinimumLength = 1, ErrorMessage = "La descripción tiene que estar entre 1 y 1000 caracteres")]
         public string Descripcion { get; set; }
 
-
-        public string Imagen { get; set; }
-
         [Required(ErrorMessage = "El género es requerido")]
         [Display(Name = "Género")]
         public int Id_Genero { get; set; }
